@@ -80,3 +80,14 @@ for epoch in range(epochs):
 # Epoch 80: Loss=2.7438
 # Epoch 90: Loss=2.2779
 
+# 2nd Round of execution
+# Epoch 00: Loss=4.1756
+# Epoch 10: Loss=3.5322
+# Epoch 20: Loss=2.9519
+# Epoch 30: Loss=2.4390
+# Epoch 40: Loss=1.9937
+# Epoch 50: Loss=1.6130
+# Epoch 60: Loss=1.2919
+# Epoch 70: Loss=1.0245
+# Epoch 80: Loss=0.8047
+# Epoch 90: Loss=0.6260
