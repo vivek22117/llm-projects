@@ -1,0 +1,49 @@
+import logging
+from contextlib import asynccontextmanager
+from typing import Any, AsyncGenerator
+
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse, Response
+
+# configure logging
+logging.basicConfig(filename='rag-app.log',  # Name of the log file
+                    level=logging.DEBUG,   # Minimum logging level to capture (e.g., INFO, DEBUG, WARNING, ERROR, CRITICAL)
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', # Format of log messages
+                    filemode='a')
+
+logger = logging.getLogger(__name__)
+
+@asynccontextmanager
+async def lifespan(app: FastAPI) -> AsyncGenerator[None, Any]:
+    """Application lifespan events!"""
+
+    logger.info("Starting RAG API Backend!")
+
+    try:
+        logger.info("Application startup completed successfully!")
+    except:
+        logger.error("Failed to start RAG API")
+        raise
+    yield
+
+    logger.info("Shutting down RAG API")
+
+
+app = FastAPI(title="RAG AI Agent API",
+              description="FastAPI backend RAG Implementation with Vector search",
+              version="0.0.1",
+              lifespan=lifespan)
+
+# Allowed origins (can be specific URLs or wildcards)
+origins = [
+    "http://localhost",
+    "http://localhost:3000",  # your frontend dev server
+    "https://rag-api.doubledigit-solutions.com"
+]
+app.add_middleware(CORSMiddleware,
+                   allow_origins=origins,             # allowed frontend origins
+                    allow_credentials=True,            # allow cookies, headers, sessions
+                    allow_methods=["*"],               # allow all HTTP methods
+                    allow_headers=["*"],               # allow all headers)
