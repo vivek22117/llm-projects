@@ -53,6 +53,7 @@ async def favicon() -> Response:
     """Serve the favicon requests to prevent 404 errors."""
     return FileResponse("favicon.ico")
 
+
 @app.get("/", tags=["General"])
 async def root() -> dict:
     """Root endpoint."""
