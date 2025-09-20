@@ -12,7 +12,7 @@ def setup_logging():
     """
     # Read configuration from environment variables with defaults
     LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
-    LOG_DIR = os.getenv("LOG_DIR", "../logs")
+    LOG_DIR = os.getenv("LOG_DIR", "./logs")
 
     # Create the log directory if it doesn't exist
     if not os.path.exists(LOG_DIR):
@@ -27,11 +27,11 @@ def setup_logging():
             # JSON formatter for file logs (machine-readable)
             "json": {
                 "()": "pythonjsonlogger.jsonlogger.JsonFormatter",
-                "format": "%(asctime)s %(levelname)s %(name)s %(message)s",
+                "format": "%(asctime)s %(levelname)s %(name)s %(message)s (Line: %(lineno)d)",
             },
             # Standard formatter for console logs (human-readable)
             "standard": {
-                "format": "[%(asctime)s] - %(levelname)s - %(name)s - %(message)s",
+                "format": "[%(asctime)s] - %(levelname)s - %(name)s - %(message)s (Line: %(lineno)d)",
             },
         },
         "handlers": {

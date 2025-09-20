@@ -14,7 +14,7 @@ router = APIRouter()
 def health_check() -> HealthResponse:
     try:
         db_healthy = True
-
+        logger.info("Health check successful!")
         return HealthResponse(status="ok", database_connection=db_healthy)
 
     except Exception as ex:

@@ -6,13 +6,9 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, Response
+from utils.logging import setup_logging
 
-# configure logging
-logging.basicConfig(filename='rag-app.log',  # Name of the log file
-                    level=logging.DEBUG,   # Minimum logging level to capture (e.g., INFO, DEBUG, WARNING, ERROR, CRITICAL)
-                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', # Format of log messages
-                    filemode='a')
-
+setup_logging()
 logger = logging.getLogger(__name__)
 
 @asynccontextmanager
