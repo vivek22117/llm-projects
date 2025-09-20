@@ -1,9 +1,8 @@
-
 import logging
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.params import Depends
 
-from .rate_limiter import limiter
+from ..utils.rate_limiter import limiter
 from ..models.responses import HealthResponse
 
 logger = logging.getLogger(__name__)
