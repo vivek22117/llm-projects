@@ -46,4 +46,22 @@ app.add_middleware(CORSMiddleware,
                    allow_origins=origins,             # allowed frontend origins
                     allow_credentials=True,            # allow cookies, headers, sessions
                     allow_methods=["*"],               # allow all HTTP methods
-                    allow_headers=["*"],               # allow all headers)
+                    allow_headers=["*"])               # allow all headers
+
+@app.get("/favicon.ico", include_in_schema=False)
+async def favicon() -> Response:
+    """Serve the favicon requests to prevent 404 errors."""
+    return FileResponse("favicon.ico")
+
+@app.get("/", tags=["General"])
+async def root() -> dict:
+    """Root endpoint."""
+    return {"message": "Welcome to RAG API!",
+            "version": "0.0.1",
+            "endpoints": {
+                "health": "/healthz",
+                "answer": "/ans",
+                "greet": "/greet/{name}"
+            }
+    }
+
